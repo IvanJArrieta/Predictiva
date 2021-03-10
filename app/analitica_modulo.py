@@ -30,11 +30,10 @@ class analitica():
         self.df = self.df.append(new_data, ignore_index=True)
         new_data = {"fecha": date_time, "sensor": msj_vetor[2], "valor": float(msj_vetor[3])}
         self.df = self.df.append(new_data, ignore_index=True)
-        new_data = {"fecha": date_time, "sensor": msj_vetor[4], "valor": float(msj_vetor[5])}
-        self.df = self.df.append(new_data, ignore_index=True)
+        
         self.publicar("temperatura",msj_vetor[1])
         self.publicar("humedad",msj_vetor[3])
-        self.publicar("presion",msj_vetor[5])
+        
         self.analitica_descriptiva()
         self.analitica_predictiva()
         self.guardar()
@@ -45,7 +44,7 @@ class analitica():
     def analitica_descriptiva(self):
         self.operaciones("temperatura")
         self.operaciones("humedad")
-        self.operaciones("presion")
+        
 
     def operaciones(self, sensor):
         df_filtrado = self.df[self.df["sensor"] == sensor]
@@ -60,7 +59,7 @@ class analitica():
     def analitica_predictiva(self):
         self.regresion("temperatura")
         self.regresion("humedad")
-        self.regresion("presion")
+        
 
     def regresion(self, sensor):
         df_filtrado = self.df[self.df["sensor"] == sensor]
